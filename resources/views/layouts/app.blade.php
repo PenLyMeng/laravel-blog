@@ -14,6 +14,8 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/toastr.min.css') }}" rel="stylesheet">
 
+    @yield('styles')
+
 </head>
 <body>
 <div id="app">
@@ -86,28 +88,55 @@
                     <ul class="list-group">
 
                         <li class="list-group-item">
-                            <a href="{{route('home')}}">Home</a>
+                            <a href="{{route('admin.home')}}">Home</a>
                         </li>
 
                         <li class="li list-group-item">
-                            <a href="{{route('category.create')}}">Create New Category</a>
+                            <a href="{{route('user.profile')}}">Profile</a>
                         </li>
+
+                        @if(Auth::user()->admin)
+                            <li class="li list-group-item">
+                                <a href="{{route('users')}}">View All Users</a>
+                            </li>
+                        @endif
+
+
+                        <li class="li list-group-item">
+                            <a href="{{route('posts')}}">View All Posts</a>
+                        </li>
+
                         <li class="li list-group-item">
                             <a href="{{route('categories')}}">View All Categories</a>
                         </li>
+
+                        <li class="li list-group-item">
+                            <a href="{{route('tags')}}">View All Tags</a>
+                        </li>
+
+                        @if(Auth::user()->admin)
+                        <li class="li list-group-item">
+                            <a href="{{route('user.create')}}">Create New User</a>
+                        </li>
+                        @endif
 
                         <li class="li list-group-item">
                             <a href="{{route('post.create')}}">Create New Post</a>
                         </li>
 
                         <li class="li list-group-item">
-                            <a href="{{route('posts')}}">View All Posts</a>
+                            <a href="{{route('category.create')}}">Create New Category</a>
                         </li>
-
-
+                        <li class="li list-group-item">
+                            <a href="{{route('tag.create')}}">Create New Tag</a>
+                        </li>
                         <li class="li list-group-item">
                             <a href="{{route('posts.trashed')}}">Trash</a>
                         </li>
+                        <li class="li list-group-item">
+                            <a href="{{route('settings')}}">Setting</a>
+                        </li>
+
 
                     </ul>
                 </div>
@@ -136,6 +165,8 @@
     @endif
 
 </script>
+
+@yield('scripts')
 
 </body>
 </html>

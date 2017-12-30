@@ -28,33 +28,42 @@
                 </thead>
 
                 <tbody>
-                @foreach($posts as $post)
-                    <tr>
-                        <td>
-                            <img src="{{$post->featured}}" alt=" Image Not Available" width="90px" height="50px"/>
+                    @if($posts->count()>0)
+                        @foreach($posts as $post)
+                            <tr>
+                                <td>
+                                    <img src="{{$post->featured}}" alt=" Image Not Available" width="90px" height="50px"/>
 
-                        </td>
-                        <td>
-                            {{$post->title}}
-                        </td>
-                        <td>
-                            <a href="{{route('post.edit',['id' => $post->id])}}" class="btn btn-sm btn-info">
+                                </td>
+                                <td>
+                                    {{$post->title}}
+                                </td>
+                                <td>
+                                    <a href="{{route('post.edit',['id' => $post->id])}}" class="btn btn-xs btn-info">
                                 <span>
-                                    Edit
+                                    edit
                                 </span>
-                            </a>
+                                    </a>
 
 
-                        </td>
+                                </td>
 
-                        <td>
-                            <a href="{{route('post.trash',['id' => $post->id])}}"
-                               class="btn btn-sm btn-danger">
-                                <span> Trash </span>
-                            </a>
-                        </td>
-                    </tr>
-                @endforeach
+                                <td>
+                                    <a href="{{route('post.trash',['id' => $post->id])}}"
+                                           class="btn btn-xs btn-danger">
+                                        <span> trash </span>
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                        @else
+                            <tr>
+                                <th colspan="5" class="text-center">
+                                    No posts
+                                </th>
+                            </tr>
+                        @endif
+
                 </tbody>
             </table>
         </div>

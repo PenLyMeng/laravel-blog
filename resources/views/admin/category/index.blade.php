@@ -23,29 +23,37 @@
                 </thead>
 
                 <tbody>
-                @foreach($categories as $category)
-                    <tr>
-                        <td>
-                            {{$category->name}}
-                        </td>
-                        <td>
-                            <a href="{{route('category.edit',['id' => $category->id])}}" class="btn btn-sm btn-info">
-                                <span class="glyphicon glyphicon-pencil">
-
+                    @if($categories->count()>0)
+                        @foreach($categories as $category)
+                            <tr>
+                                <td>
+                                    {{$category->name}}
+                                </td>
+                                <td>
+                                    <a href="{{route('category.edit',['id' => $category->id])}}" class="btn btn-xs btn-info">
+                                <span>
+                                    edit
                                 </span>
-                            </a>
+                                    </a>
 
 
 
-                        </td>
+                                </td>
 
-                        <td>
-                            <a href="{{route('category.delete',['id' => $category->id])}}" class="btn btn-sm btn-danger">
-                                 <span> x </span>
-                            </a>
-                        </td>
-                    </tr>
-                @endforeach
+                                <td>
+                                    <a href="{{route('category.delete',['id' => $category->id])}}" class="btn btn-xs btn-danger">
+                                        <span> delete </span>
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                        @else
+                     <tr>
+                        <th colspan="5" class="text-center">
+                            No categories
+                        </th>
+                     </tr>
+                        @endif
                 </tbody>
             </table>
         </div>

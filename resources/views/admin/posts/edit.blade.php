@@ -33,13 +33,37 @@
 
                 <div class="form-group">
                     <label for="category_id"></label>
+
                     <select id="category_id" name="category_id" class="form-control">
+
                         @foreach($categories as $category)
-                            <option value="{{$category->id}}">{{$category->name}}</option>
+                            <option value="{{$category->id}}"
+                                    @if($category->id == $post->category_id)  selected @endif>
+                                {{$category->name}}</option>
                         @endforeach
+
                     </select>
                 </div>
 
+                <div class="form-group">
+                    <label for="checkbox">Select tags</label>
+                    @foreach($tags as $tag)
+                        <div class="checkbox" name="checkbox">
+                            <label><input type="checkbox" name="tags[]" value="{{$tag->id}}"
+                                        @foreach($post->tags as $t )
+                                            @if($tag->id == $t->id)
+                                                checked
+                                            @endif
+                                        @endforeach
+
+
+                                >{{$tag->tag}}</label>
+                        </div>
+
+                    @endforeach
+
+
+                </div>
 
                 <div class="form-group">
                     <label for="featured">Featured image</label>
@@ -48,13 +72,11 @@
                 </div>
 
 
-
                 <div class="form-group">
                     <label for="post_content">Content</label>
-                    <textarea name="post_content" value="{{$post->post_content}}" id="post_content" cols="5" rows="5" class="form-control"></textarea>
+                    <textarea name="post_content" id="post_content" cols="5" rows="5"
+                              class="form-control">{{$post->content}}</textarea>
                 </div>
-
-
 
 
                 <div class="form-group">
@@ -71,5 +93,25 @@
 
     </div>
 
+
+
+
+@stop
+
+
+@section('styles')
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
+@stop
+
+@section('scripts')
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $('#post_content').summernote({
+                height: 300,
+            });
+        });
+    </script>
 
 @stop
